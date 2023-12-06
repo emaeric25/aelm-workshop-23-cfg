@@ -26,3 +26,19 @@ jobs:
     - name: Apply Openshift YAML
       run: |
         kubectl apply -f openshift.yaml -n aernouthoebreckx-dev
+  deploy-tst:
+    if: github.ref == 'refs/heads/tst'
+    environment: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login OpenShift
+      uses: redhat-actions/oc-login@v1
+      with:
+        openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
+        openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+        namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+    - name: Apply Openshift YAML
+      run: |
+        kubectl apply -f openshift.yaml -n aernouthoebreckx-dev

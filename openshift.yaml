@@ -1,23 +1,23 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: dev-aelm-workshop-23-app
+  name: tst-aelm-workshop-23-app
   labels:
-    app: dev-aelm-workshop-23-app
+    app: tst-aelm-workshop-23-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: dev-aelm-workshop-23-app
+      app: tst-aelm-workshop-23-app
   template:
     metadata:
       labels:
-        app: dev-aelm-workshop-23-app
+        app: tst-aelm-workshop-23-app
     spec:
       containers:
       - name: workshop
         image: >-
-          docker.io/tourna/aelm-workshop-23:main
+          docker.io/tourna/aelm-workshop-23:1.0.0
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
@@ -26,9 +26,9 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: dev-aelm-workshop-23-app
+  name: tst-aelm-workshop-23-app
   labels:
-    app: dev-aelm-workshop-23-app
+    app: tst-aelm-workshop-23-app
 spec:
   ports:
   - name: 3000-tcp
@@ -36,18 +36,18 @@ spec:
     port: 3000
     targetPort: 3000
   selector:
-    app: dev-aelm-workshop-23-app
+    app: tst-aelm-workshop-23-app
 ---
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: dev-aelm-workshop-23-app
+  name: tst-aelm-workshop-23-app
   labels:
-    app: dev-aelm-workshop-23-app
+    app: tst-aelm-workshop-23-app
 spec:
   to:
     kind: Service
-    name: dev-aelm-workshop-23-app
+    name: tst-aelm-workshop-23-app
     weight: 100
   port:
     targetPort: 3000-tcp
