@@ -6,7 +6,7 @@ metadata:
     app: dev-aelm-workshop-23-app
 spec:
   ## TODO: Update to x amount of replica's --> Need high availability
-  replicas: 0
+  replicas: 3
   selector:
     matchLabels:
       app: dev-aelm-workshop-23-app
@@ -18,7 +18,7 @@ spec:
       containers:
       - name: workshop
         image: >-
-          <<TODO>>
+          em592/aelm-workshop-23:main
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
